@@ -1,7 +1,8 @@
-function page({ params }: { params: { id: string } }) {
+async function page({ params }: { params: { id: string } }) {
+  const { id } = await params;
   return (
     <div>
-      <h1 className='text-4xl'>ID : {params.id}</h1>
+      <h1 className='text-4xl'>ID : {id}</h1>
     </div>
   );
 }

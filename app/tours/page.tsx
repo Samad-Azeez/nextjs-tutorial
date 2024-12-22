@@ -19,7 +19,11 @@ async function ToursPage() {
       <h1 className='text-3xl mb-4'>Tours</h1>
       {data.map((tour) => {
         return (
-          <Link key={tour.id} href={`/tours/${tour.id}`}>
+          <Link
+            className='hover:text-blue-500'
+            key={tour.id}
+            href={`/tours/${tour.id}`}
+          >
             <h2>{tour.name}</h2>
           </Link>
         );

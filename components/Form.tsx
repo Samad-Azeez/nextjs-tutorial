@@ -1,8 +1,4 @@
-// Asynchronous function to create a user
-const createUser = async () => {
-  'use server';
-  console.log('creating user ...');
-};
+import { createUser } from '@/app/utils/actions';
 
 // Form component
 function Form() {

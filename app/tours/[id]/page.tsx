@@ -1,5 +1,8 @@
 import hijabImg from '@/images/hijab.jpg';
 import Image from 'next/image';
+
+const url = 'https://www.course-api.com/images/tours/tour-1.jpeg';
+
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   return (
@@ -19,7 +22,17 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
           <h2>local image</h2>
         </div>
         {/* remote image */}
-        <div></div>
+        <div>
+          <Image
+            src={url}
+            alt='tour'
+            width={300}
+            height={300}
+            priority
+            className='w-[300] h-[300] object-cover rounded'
+          />
+          <h2>remote image</h2>
+        </div>
       </section>
     </div>
   );

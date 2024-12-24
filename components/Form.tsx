@@ -1,3 +1,5 @@
+'use client';
+
 import { createUser } from '@/app/utils/actions';
 
 // Form component

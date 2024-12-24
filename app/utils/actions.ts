@@ -19,9 +19,13 @@ export const createUser = async (formData: FormData) => {
   //   console.log(rawData);
 
   const newUser: User = { firstName, lastName, id: Date.now().toString() };
-  await saveUser(newUser);
 
-  revalidatePath('/actions'); // Revalidate the page
+  try {
+    await saveUser(newUser);
+    revalidatePath('/actions'); // Revalidate the page
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchUsers = async (): Promise<User[]> => {

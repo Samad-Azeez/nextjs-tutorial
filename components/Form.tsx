@@ -1,7 +1,8 @@
 'use client';
 
 import { createUser } from '@/app/utils/actions';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
 
 // SubmitButton component
 function SubmitButton() {
@@ -16,8 +17,21 @@ function SubmitButton() {
 
 // Form component
 function Form() {
+  const [message, formAction] = useActionState(createUser, null);
   return (
-    <form action={createUser} className={formStyle}>
+    <form action={formAction} className={formStyle}>
+      {/* Display success/error message */}
+      {message ? (
+        <p
+          className={
+            message === 'user created successfully....'
+              ? 'text-green-500'
+              : 'text-red-500'
+          }
+        >
+          {message}
+        </p>
+      ) : null}
       <h2 className='text-2xl capitalize mb-4'>create user</h2>
       {/* Input field for first name */}
       <input

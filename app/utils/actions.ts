@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'fs/promises';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+/**FORM ACTION */
 type User = {
   id: string;
   firstName: string;
@@ -40,4 +41,24 @@ const saveUser = async (user: User) => {
   const users = await fetchUsers();
   users.push(user);
   await writeFile('users.json', JSON.stringify(users));
+};
+
+/**DELETE ACTION */
+
+export const deleteUser = async (formData: FormData) => {
+  const id = formData.get('id') as string;
+  const users = await fetchUsers();
+  const newUsers = users.filter((user: User) => user.id !== id);
+  await writeFile('users.json', JSON.stringify(newUsers));
+  revalidatePath('/actions'); // Revalidate the page
+};
+
+export const removeUser = async (id: string, formData: FormData) => {
+  // const name = formData.get('name') as string;
+  // console.log(name);
+
+  const users = await fetchUsers();
+  const newUsers = users.filter((user: User) => user.id !== id);
+  await writeFile('users.json', JSON.stringify(newUsers));
+  revalidatePath('/actions'); // Revalidate the page
 };

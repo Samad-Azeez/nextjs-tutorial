@@ -1,7 +1,6 @@
 'use server';
 import { readFile, writeFile } from 'fs/promises';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 /**FORM ACTION */
 type User = {
@@ -10,8 +9,13 @@ type User = {
   lastName: string;
 };
 
+type FormState = string | null;
+
 // Asynchronous function to create a user
-export const createUser = async (previousState: any, formData: FormData) => {
+export const createUser = async (
+  previousState: FormState,
+  formData: FormData
+) => {
   const firstName = formData.get('firstName') as string;
   const lastName = formData.get('lastName') as string;
 
@@ -54,8 +58,8 @@ export const deleteUser = async (formData: FormData) => {
 };
 
 export const removeUser = async (id: string, formData: FormData) => {
-  // const name = formData.get('name') as string;
-  // console.log(name);
+  const name = formData.get('name') as string;
+  console.log(name);
 
   const users = await fetchUsers();
   const newUsers = users.filter((user: User) => user.id !== id);
